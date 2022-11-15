@@ -32,3 +32,10 @@ An overview of the package is illustrated below:
 The author of this package is Samantha Pang.
 
 ## References 
+
+## Acknowledgements 
+This package was developed as part of an assessment for 2022
+BCB410H: Applied Bioinformatics course at the University of
+Toronto, Toronto, CANADA. <PackageName>welcomes issues,
+enhancement requests, and other contributions. To submit an issue,
+use the GitHub issues
