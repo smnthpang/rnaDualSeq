@@ -9,6 +9,8 @@
 #'
 #' @return data.norm DGEList
 #'
+#' @import edgeR
+#'
 norm_TMM <- function(data, pheno) {
   time <- pheno[colnames(data), "temporal"]
   dge <-

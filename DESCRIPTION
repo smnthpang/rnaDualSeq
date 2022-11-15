@@ -14,19 +14,17 @@ Imports:
     dplyr,
     plyr,
     tidyr,
-    VennDiagram,
+    ggplot2,
     Biobase,
     magrittr,
     e1071
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.2
 Depends: R (>= 3.1.0)
 biocViews:
 Suggests: 
     rmarkdown,
     knitr,
-    testthat (>= 3.0.0),
-    rmarkdown
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-
