@@ -46,7 +46,7 @@ rnaDualSeq has functions that
 See vignettes for tutorial on package:
 
 ``` bash
-browseVignettes("<rnaDualSeq>")
+browseVignettes("rnaDualSeq")
 ```
 
 An overview of the package is illustrated below:
@@ -54,17 +54,6 @@ An overview of the package is illustrated below:
 ## Contributing
 
 The author of this package is Samantha Pang. The
-
-The obtainGTF(), obtainDNA() and obtainCDNA() functions makes use of
-rvest package to web scrape from online database. The txdbObj function
-makes use of makeTxDbFromGFF() function from GenomicFeatures package to
-create a txdb object from GTF file. The generateMatrix() function uses
-pheatmap function from pheatmap R package to plot the heatmap. The stats
-and ggplot2 R packages are used for principle component analysis in
-plotPCA() function. The rstudioapi CRAN package is used to send commands
-to terminal for downloading Salmon software in installSalmon() function,
-as well as running Salmon commands for indexing and quantification in
-quantification() function.
 
 ## References
 
