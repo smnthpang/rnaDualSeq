@@ -55,7 +55,7 @@ browseVignettes("rnaDualSeq")
 
 An overview of the package is illustrated below:
 
-![alt text](README_files/figure-gfm/workflow.png)
+![alt text](inst/extdata/workflow.png)
 
 ## Contributing
 
