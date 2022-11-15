@@ -2,7 +2,7 @@
 
 # normalization
 
-#'Normalize data by using TMM log to convert size of data to an effective library size
+#'Normalize data by using trimmed mean of M-values to convert size of data to an effective library size
 #'
 #' @param data
 #' @param pheno
