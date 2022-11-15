@@ -20,6 +20,12 @@ ls("package:rnaDualSeq")
 data(package = "rnaDualSeq")
 ```
 
+See vignettes for tutorial on package:
+```bash
+ls("package:<rnaDualSeq>")
+data(package = "<rnaDualSeq>") # optional
+browseVignettes("<rnaDualSeq>")
+```
 An overview of the package is illustrated below:
 
 ## Contributing
