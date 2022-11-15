@@ -11,7 +11,7 @@
 #' @param pheno  csv file containing sample names and time/condition of each sample
 #'
 #' @return list of differentially expressed genes compared with the baseline (0 hours)
-#'
+#' @import stats
 #' @import limma
 #' @export
 #'

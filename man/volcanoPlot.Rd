@@ -14,6 +14,8 @@ volcanoPlot(
 \item{differentialExpression}{A nested list containing differentially expressed results}
 
 \item{timeperiods}{a vector containing labels for each time period}
+
+\item{name}{what gene is being graphed}
 }
 \value{
 images of volcano plots per time period

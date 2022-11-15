@@ -8,7 +8,7 @@ differential expression at different time periods}
 identifyDE(data, pheno)
 }
 \arguments{
-\item{data}{dRNA-seq tab-delimited input csv file with read counts}
+\item{data}{normalized data read counts}
 
 \item{pheno}{csv file containing sample names and time/condition of each sample}
 }

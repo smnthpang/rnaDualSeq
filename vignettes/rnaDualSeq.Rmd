@@ -9,73 +9,147 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.align = "center", 
+               out.width = "90%",
+               fig.width = 6, fig.height = 5.5,
+               dev.args=list(pointsize=10),
+               par = TRUE, # needed for setting hook 
+               collapse = TRUE, # collapse input & ouput code in chunks
+               warning = FALSE)
+knit_hooks$set(par = function(before, options, envir)
+  { if(before && options$fig.show != "none") 
+       par(family = "sans", mar=c(4.1,4.1,1.1,1.1), mgp=c(3,1,0), tcl=-0.5)
+})
+set.seed(1) # for exact reproducibility
+```
+
+
+# Introduction 
+`rnaDualSeq` is an R package developed take host-pathogen gene read counts and analyze them for differentially expressed genes. This package can separate the data by periods of time from when the host was infected with the pathogen, then create volcano plots to visualize the upregulated and downregulated genes from each time period. 
+
+Download this package using the steps below:
 ```{r}
 require("devtools")
 devtools::install_github("smnthpang/rnaDualSeq", dependencies=TRUE)
 library("rnaDualSeq")
 ```
-# Introduction 
 
-Hi 
+To list all sample functions available in the package:
+``` r
+ls("package:rnaDualSeq")
+```
 
-This project was created following instruction provided by BCB410 at the University of Toronto. For full citations please see README.Rmd.
-
+To list all sample datasets available in the package:
+``` r
+data(package = "rnaDualSeq")
+```
 # Workflow Description 
 
 Below is a description of how rnaDualSeq operates 
 
-1. Verify data format 
-  * see Data Input section
-2. Group modules if they have an increased edge density between module than in the more connected module itself. 
-3. Layout graph based on new modules
-4. Visualize graph
+1. Create data frames from csv files 
+2. Normalize data
+3. Identify all DE genes within data 
+4. Visualize graph using volcano plots 
 
+## QuickStart 
 
+First use sample data provided within the data folder to create host and pathogen data frames using read_csv function.
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+```
+host_example <- rnaDualSeq::read_csv("Data/Host.data.csv")
+pathogen_example <- read_csv("Data/Pathogen.data.csv")
+phenotype_example <- read_csv("Data/Pheno.csv")
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+### norm_TMM 
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+Next we can normalize the read counts in each host and pathogen dataframe using the function __*norm_TMM*__. This will return a DGEList of all the counts normalized 
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```
+host_normalized_data <- norm_TMM(host_example, phenotype_example)
+pathogen_normalized_data <- norm_TMM(pathogen_example, phenotype_example)
 ```
 
-Also a quote using `>`:
+### identifyDE 
+Now we have normalized counts, we can use the limma package to identify what genes are differentially expressed and categorize them by hour. 
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+```
+host_DE <- identifyDE(host_normalized_data, phenotype_example)
+pathogen_DE <- identifyDE(pathogen_normalized_data, phenotype_example)
+```
+
+### volcanoPlot
+Now we can use these differentially expressed genes and plot them on a volcano graph to compare upregulated/downregulated genes between host and pathogen. And see the impact of time that infection first started on how 
+DEs occur. A result folder containing these plots will appear if it isn't already built. 
+
+```
+volcanoPlot("Host", host_DE)
+volcanoPlot("Pathogen", host_DE)
+```
+### Minimal requirements
+
+* The **R subdirectory** within an R package contains all the R code files or script files. These are files ending with ".R". 
+
+* The **man subdirectory** contains help documentation for each function that is available to the user. Help files should be autogenerated via *roxygen2* package based on the roxygen tags used in the .R files from R subdirectory.
+
+* **DESCRIPTION** file contains metadata, including the package name, the version number, the author and maintainer contact information, along with other information.
+
+* **NAMESPACE** file provides a "context for looking up the value of an object associated with a name". This file will contain export(), import() and importFrom() statements. This file will be auto-updated via *roxygen2* package based on the roxygen tags used in the .R files from R subdirectory.
+
+### Other
+
+* **README** file mainly describes what the package does. For the purpose of this course, the following elements in order are required: 1. Description, 2. Installation, 3. Overview, 4. Contributions, 5. References, and 6. Acknowledgements. Any other content of student's choice should be placed after these six elements. 
+
+* **LICENSE** file describing who can use the R package. 
+
+* The **data** subdirectory with data (.rda) is included to demonstrate utility of functions in the package with this data. If data is included, proper documentation for data must be provided using data.R file. Including data in the R package, however, is optional. If not providing own data, must show examples with external datasets so user of the package can still understand utility of each function. 
+
+* The **tests** subdirectory includes the testthat subdirectory, which has test that are written to see if functions are working as expected. There should be unit tests and integration tests. 
+
+* The **vignettes** subdirectory permit to include vignettes that provide an overview of the R package.
+
+* The **inst** subdirectory contains other files and subdirectories. **CITATION** file should be included here. Other subdirectories may include extdata and shiny-scripts. The **extdata** subdirectory can include images included in README file. The **shiny-scripts** subdirectory should include shiny script files (app.R). 
+
+* The local project must be housed in a GitHub repository. There should be a record of the changes made to the package via Git commit messages. For the purpose of this course, ensure the **.Rproj** file is available on GitHub. Do NOT add it to .gitignore.
+
+<br>
+
+<div style="text-align:left">
+
+## Package References
+
+[Samantha, P. (2022) rnaDualSeq Vignette. Unpublished.](https://github.com/smnthpang/rnaDualSeq)
+
+## Other References
+Dinarvand, M., Kock, F., Al Mouiee, D., Vuong, K., Vijayan, A., Tanzim, A. F., Azad, A. K. M., Penesyan, A., Castaño-Rodríguez, N., &amp; Vafaee, F. (2022). DSEQSB: A Systems Biology Approach to decipher dynamics of host-pathogen interactions using temporal dual RNA-Seq Data. https://doi.org/10.1101/2022.02.28.482417 
+
+Doyle, M. (2022, October 18). Galaxy training: Visualization of RNA-seq results with volcano plot in R. Galaxy Training Network. Retrieved November 15, 2022, from https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html 
+
+Love, M. I., Anders, S., Kim, V., &amp; Huber, W. (n.d.). RNA-seq workflow: gene-level exploratory analysis and differential expression. RNA-seq workflow: Gene-level exploratory analysis and differential expression. Retrieved November 15, 2022, from https://www.bioconductor.org/packages/devel/workflows/vignettes/rnaseqGene/inst/doc/rnaseqGene.html 
+
+Walch, P., Selkrig, J., Knodler, L. A., Rettel, M., Stein, F., Fernandez, K., Viéitez, C., Potel, C. M., Scholzen, K., Geyer, M., Rottner, K., Steele-Mortimer, O., Savitski, M. M., Holden, D. W., &amp; Typas, A. (2021). Global mapping of salmonella enterica-host protein-protein interactions during infection. Cell Host &amp; Microbe, 29(8). https://doi.org/10.1016/j.chom.2021.06.004 
+
+Westermann, A. J., Förstner, K. U., Amman, F., Barquist, L., Chao, Y., Schulte, L. N., Müller, L., Reinhardt, R., Stadler, P. F., &amp; Vogel, J. (2016). Dual RNA-seq unveils noncoding RNA functions in host–pathogen interactions. Nature, 529(7587), 496–501. https://doi.org/10.1038/nature16547 
+
+Macho Rendón, J., Lang, B., Ramos Llorens, M., Tartaglia, G.G., and Torrent Burgas, M. (2021). DualSeqDB: a database to assess the relevance of bacterial genes during host infection. Nucleic Acids Res. 49, D687–D693.
+
+Ritchie ME, Phipson B, Wu D, Hu Y, Law CW, Shi W, Smyth GK (2015). “limma powers differential expression analyses for RNA-sequencing and microarray studies.” Nucleic Acids Research, 43(7), e47. doi: 10.1093/nar/gkv007.
+Wickham H (2016). ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York. ISBN 978-3-319-24277-4, https://ggplot2.tidyverse.org.
+
+Robinson MD, McCarthy DJ and Smyth GK (2010). edgeR: a
+  Bioconductor package for differential expression analysis of
+  digital gene expression data. Bioinformatics 26, 139-140
+  
+Robinson MD, McCarthy DJ and Smyth GK (2010). edgeR: a
+  Bioconductor package for differential expression analysis of
+  digital gene expression data. Bioinformatics 26, 139-140
+
+<br>
+
+```{r}
+sessionInfo()
+```

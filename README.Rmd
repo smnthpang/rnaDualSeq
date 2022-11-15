@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 rnaDualSeq is an R package to house functions that help facilitate and visualize differentially expressed genes within host-pathogen infection studies. 
 
+The rnaDualSeq package was developed using R version 4.2.1 (2022-06-23), platform x86_64-apple-darwin17.0 and Running under: macOS Mojave 10.14
+
 ## Installation
 
 To run latest version of package:

@@ -3,6 +3,7 @@
 #' Creates 5 volcano plots denoting each time period in data set visualing
 #' significant upregulation and downregulation genes
 #'
+#' @param name what gene is being graphed
 #' @param differentialExpression A nested list containing differentially expressed results
 #' @param timeperiods a vector containing labels for each time period
 #'
@@ -32,7 +33,7 @@ volcanoPlot <- function(differentialExpression, timeperiods = c("2h", "4h", "8h"
       }
     }
     check_if_directory_exists("Results/VolcanoPlots")
-    ggsave(paste("volcanoPlot_",timeperiods[n],".pdf",sep=""), graph, path = "Results/VolcanoPlots")
+    ggsave(paste(name,"_",timeperiods[n],".pdf",sep=""), graph, path = "Results/VolcanoPlots")
 
   }
 }
