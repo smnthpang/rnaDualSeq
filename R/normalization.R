@@ -10,8 +10,10 @@
 #' @return data.norm DGEList
 #'
 #' @import edgeR
+#' @export
 #'
 norm_TMM <- function(data, pheno) {
+
   time <- pheno[colnames(data), "temporal"]
   dge <-
     edgeR::DGEList(counts = data,
@@ -21,3 +23,6 @@ norm_TMM <- function(data, pheno) {
     edgeR::cpm(edgeR::calcNormFactors(dge, method = "TMM"), log = TRUE)
   return (data.norm)
 }
+
+
+

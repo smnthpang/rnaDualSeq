@@ -30,8 +30,9 @@ rnaDualSeq has functions that
 
 -   read in an input data file containing the read counts of a genes
     where samples are matched to different time periods in sections of
-    hours
--   read in a phenotype file that describes the sample to groups
+    hours (see read_csv)
+-   read in a phenotype file that describes the sample to groups (see
+    read_csv)
 -   normalises the raw counts within the data file by using the trimmed
     mean of M-values (TMM) to correct for RNA composition differences.
     After that, the normalised data is log2 transformed. (see function
@@ -51,9 +52,23 @@ browseVignettes("rnaDualSeq")
 
 An overview of the package is illustrated below:
 
+![alt text](README_files/figure-gfm/workflow.png)
+
 ## Contributing
 
-The author of this package is Samantha Pang. The
+The author of this package is Samantha Pang.
+
+The read_csv() uses the utils package to read in a file in table format
+and creates a data frame from it. The norm_TMM() function uses the edgeR
+package to create a DGEList and uses cpm (counts per million) function
+and the normalization method of TMM (trimmed mean of M-values). The
+normalized data is also log2 transformed. The indentifyDE() function
+uses limma package to identify differentially expressed genes.
+makeConstrasts function from limma package allows for a contrast matrix
+using time slots as set of parameters to be made. The volcanoPlot()
+functions uses ggplot2 package to create a graph of differentially
+expressed genes. They also uses ggsave function to store pdfs of the
+visualizations into a folder labelled by time period.
 
 ## References
 
@@ -113,28 +128,3 @@ This package was developed as part of an assessment for 2022 BCB410H:
 Applied Bioinformatics course at the University of Toronto, Toronto,
 CANADA. <PackageName>welcomes issues, enhancement requests, and other
 contributions. To submit an issue, use the GitHub issues
-
-## Including Code
-
-You can include R code in the document as follows:
-
-``` r
-summary(cars)
-```
-
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
-
-## Including Plots
-
-You can also embed plots, for example:
-
-![](README_files/figure-gfm/pressure-1.png)<!-- -->
-
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
