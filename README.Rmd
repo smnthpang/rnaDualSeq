@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Description
 
-rnaDualSeq is an R package to house functions that help facilitate and visualize differentially expressed genes within host-pathogen infection studies. 
+rnaDualSeq is an R package to house functions that help facilitate and visualize differentially expressed genes within host-pathogen infection studies. This tool will analyze the transcriptome related to bacterial infections of eukaryotic cells. Pathogens cause profound transcriptomic remodelling of the host during infection. They cause the expression of unique genes that ensure their survival and allow them to replicate within the host. Dual RNA sequencing studies allow researchers to identify hidden molecular phenotypes of virulence-associated small noncoding RNAs that were not visible in standard infection assays. This package can use read counts from genes of either host or pathogen and reports the differentially expressed genes visually via volcano plots.
 
 The rnaDualSeq package was developed using R version 4.2.1 (2022-06-23), platform x86_64-apple-darwin17.0 and Running under: macOS Mojave 10.14
 
