@@ -35,7 +35,7 @@ volcanoPlot <- function(differentialExpression, timeperiods = c("2h", "4h", "8h"
 
   }
 }
-#
+# testing on one element
 # de_norm[[1]]$diffexpressed <- "NO"
 #
 # head(de_norm[[1]])
