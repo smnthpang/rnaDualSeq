@@ -13,5 +13,8 @@
 #'
 
 read_csv <- function(path) {
+  if (!file.exists(path)) {
+    stop("Not valid input!")
+  }
   return(read.csv(path, row.names = 1))
 }

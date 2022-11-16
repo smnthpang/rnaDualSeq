@@ -59,7 +59,7 @@ Below is a description of how rnaDualSeq operates
 First use sample data provided within the data folder to create host and pathogen data frames using read_csv function.
 
 ```
-host_example <- rnaDualSeq::read_csv("Data/Host.data.csv")
+host_example <- read_csv("Data/Host.data.csv")
 pathogen_example <- read_csv("Data/Pathogen.data.csv")
 phenotype_example <- read_csv("Data/Pheno.csv")
 
