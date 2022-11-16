@@ -7,18 +7,19 @@
 #' The limma package is used to find differentially expressed (DE) genes, in which expression data
 #' is described by linear modelling
 #'
-#' @param data normalized data read counts
-#' @param pheno  csv file containing sample names and time/condition of each sample
+#' @param data dRNA-seq tab-delimited input csv file with read counts
+#' @param pheno csv file containing sample names and time/condition of each sample
 #'
 #' @return list of differentially expressed genes compared with the baseline (0 hours)
-#' @import stats
-#' @import limma
+#'
 #' @export
+#' @import limma
+#' @import stats
 #'
 
 identifyDE <- function(data, pheno){
 
-  time <- as.factor(pheno[colnames(data), "groups"])
+  time <- as.factor(pheno[colnames(data), "temporal"])
   design <- model.matrix(~ 0 + time)
 
   colnames(design) <- levels(time)
