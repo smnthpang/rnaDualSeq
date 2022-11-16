@@ -57,4 +57,3 @@ identifyDE <- function(data, pheno){
 
   return (differentialExpression)
 }
-
