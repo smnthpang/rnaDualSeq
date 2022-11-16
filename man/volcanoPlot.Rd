@@ -6,16 +6,17 @@
 significant upregulation and downregulation genes}
 \usage{
 volcanoPlot(
+  name,
   differentialExpression,
   timeperiods = c("2h", "4h", "8h", "16h", "24h")
 )
 }
 \arguments{
+\item{name}{what gene is being graphed}
+
 \item{differentialExpression}{A nested list containing differentially expressed results}
 
 \item{timeperiods}{a vector containing labels for each time period}
-
-\item{name}{what gene is being graphed}
 }
 \value{
 images of volcano plots per time period

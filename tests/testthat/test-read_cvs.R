@@ -1,3 +1,7 @@
+#'
+#'No error when running test from this script
+#'but in devtools::check() fails for one test
+
 library(rnaDualSeq)
 
 setwd("./../..")
