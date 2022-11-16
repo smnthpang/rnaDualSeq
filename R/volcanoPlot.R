@@ -4,7 +4,7 @@
 #' significant upregulation and downregulation genes
 #'
 #' @param name what gene is being graphed
-#' @param differentialExpression A nested list containing differentially expressed results
+#' @param de_norm A nested list containing differentially expressed results
 #' @param timeperiods a vector containing labels for each time period
 #'
 #' @return images of volcano plots per time period
@@ -12,7 +12,7 @@
 #' @import ggplot2
 #' @export
 #'
-volcanoPlot <- function(name, differentialExpression, timeperiods = c("2h", "4h", "8h", "16h", "24h")) {
+volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", "24h")) {
   for (n in 1:5){
     de_norm[[n]]$diffexpressed <- "NO"
     de_norm[[n]]$diffexpressed[de_norm[[n]]$logFC > .58 & de_norm[[n]]$adj.P.Val < 0.01] <- "UP"

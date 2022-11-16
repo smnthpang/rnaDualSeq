@@ -2,7 +2,7 @@ library(rnaDualSeq)
 
 setwd("./../..")
 
-test_that("column names are valid", {
+test_that("Column names are valid", {
   host <- read_csv("data/Host.data.csv")
   phen <- read_csv("data/Pheno.csv")
   test_norm <- norm_TMM(host, phen)
