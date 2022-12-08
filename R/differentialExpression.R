@@ -19,7 +19,7 @@
 
 identifyDE <- function(data, pheno){
 
-  time <- as.factor(pheno[colnames(data), "temporal"])
+  time <- as.factor(pheno[colnames(data), "groups"])
   design <- model.matrix(~ 0 + time)
 
   colnames(design) <- levels(time)

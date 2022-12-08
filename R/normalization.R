@@ -14,7 +14,7 @@
 #'
 norm_TMM <- function(data, pheno) {
 
-  time <- pheno[colnames(data), "temporal"]
+  time <- pheno[colnames(data), "groups"]
   dge <-
     edgeR::DGEList(counts = data,
                    group = time,
