@@ -60,7 +60,7 @@ ui <- fluidPage(
                 label = "Select a phenotype file that contains names of the columns headers corresponding
                           to read counts file, and groups of time/condition. File should be in .rda format",
                 accept = c(".rda")),
-      selectInput("visMethod", "Choose a host or pathogen:",
+      selectInput("pick", "Choose a host or pathogen:",
                   choices = c("Host", "Pathogen")),
 
       # br() element to introduce extra vertical spacing ----
@@ -78,7 +78,7 @@ ui <- fluidPage(
     mainPanel(
       # Output: Tabset w/ plot, summary, and table ----
       textOutput("selected_var1"),
-      textOutput("sendCustomMessage"),
+      #textOutput("sendCustomMessage"),
       #tableOutput('table'),
       plotOutput('volc'),
       #textOutput(text)
@@ -87,21 +87,24 @@ ui <- fluidPage(
   )
 )
 
-# Define server logic required to draw a histogram
+# Define server logic required to draw a volcano plot
 server <- function(input, output, session) {
 
-  # observeEvent(c(input$button1), ignoreInit = TRUE, {
-  #   showNotification("This is a notification.")
-  # })
-
-  output$table <- renderTable(iris)
-
   output$selected_var1 <- renderText({
-    "You have selected this"
+    "Volcano Plots:"
   })
+
+
 
   observeEvent(c(input$button1), ignoreInit = TRUE, {
   #dataList <- eventReactive(eventExpr = input$button1, {
+
+    choice <- input$pick
+
+    if (choice == "Host"){
+      showNotification("host")
+    }
+
     showNotification("pressed")
     inFile1 <- input$file1
     inFile2 <- input$file2
@@ -111,25 +114,34 @@ server <- function(input, output, session) {
     showNotification("after files")
 
 
-    if (is.null(inFile1) || is.null(inFile3)) {
+    if (is.null(inFile1) || is.null(inFile2) || is.null(inFile3)) {
       showNotification("error")
       return(NULL)
     }
+
     host_counts <- get(load(inFile1$datapath))
     showNotification("host_counts")
     pathogen_counts <- get(load(inFile2$datapath))
     showNotification("pathogen_counts")
     phenotype <- get(load(inFile3$datapath))
     showNotification("phenotype")
-    norm <- rnaDualSeq::norm_TMM(host_counts, phenotype)
+
+    #selecting which file to pair with phenotype
+
+    if (choice == "Host"){
+      counts <- host_counts
+    } else {
+      counts <- pathogen_counts
+    }
+
+    norm <- rnaDualSeq::norm_TMM(counts, phenotype)
     showNotification("norm")
 
     de <- rnaDualSeq::identifyDE(norm, phenotype)
     showNotification("de")
 
-
     output$volc <- renderPlot({
-      return(rnaDualSeq::volcanoPlot("Host", de))
+      return(rnaDualSeq::volcanoPlot(choice, de))
 
     })
 
