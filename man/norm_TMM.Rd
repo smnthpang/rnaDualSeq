@@ -7,9 +7,9 @@
 norm_TMM(data, pheno)
 }
 \arguments{
-\item{data}{dRNA-seq tab-delimited input csv file with read counts}
+\item{data}{dRNA-seq tab-delimited input data frame with read counts}
 
-\item{pheno}{csv file containing sample names and time/condition of each sample}
+\item{pheno}{data frame containing sample names and time/condition of each sample}
 }
 \value{
 data.norm DGEList
@@ -21,5 +21,9 @@ Normalize data by using trimmed mean of M-values to convert size of data to an e
 \dontrun{
  norm_TMM(host_example, phenotype_example)
 }
-
+}
+\references{
+Robinson MD, McCarthy DJ and Smyth GK (2010). edgeR: a Bioconductor package
+for differential expression analysis of digital gene expression data.
+Bioinformatics 26, 139-140
 }

@@ -5,7 +5,12 @@
 \title{Creates 5 volcano plots denoting each time period in data set visualing
 significant upregulation and downregulation genes}
 \usage{
-volcanoPlot(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", "24h"))
+volcanoPlot(
+  name,
+  de_norm,
+  timeperiods = c("2h", "4h", "8h", "16h", "24h"),
+  hour = "2h"
+)
 }
 \arguments{
 \item{name}{what gene is being graphed}
@@ -13,9 +18,12 @@ volcanoPlot(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", "24h"))
 \item{de_norm}{A nested list containing differentially expressed results}
 
 \item{timeperiods}{a vector containing labels for each time period}
+
+\item{hour}{time period for graph}
 }
 \value{
-images of volcano plots per time period
+graph at time period of volcano plot saves pngs images
+into a results folder
 }
 \description{
 Creates 5 volcano plots denoting each time period in data set visualing
@@ -28,4 +36,8 @@ DE <- identifyDE(norm, phenotype_example)
 volcanoPlot("Host Example", DE)
 }
 
+}
+\references{
+Wickham H (2016). ggplot2: Elegant Graphics for Data Analysis.
+Springer-Verlag New York. ISBN 978-3-319-24277-4, https://ggplot2.tidyverse.org.
 }
