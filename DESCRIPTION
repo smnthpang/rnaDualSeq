@@ -2,7 +2,9 @@ Package: rnaDualSeq
 Type: Package
 Title: Visual Analysis on Dual RNA sequences in relation to infection studies 
 Version: 0.1.0
-Author: person("Samantha", "Pang", email = "samantha.pang@mail.utoronto.ca", role = c("aut", "cre"))
+Author: person("Samantha", "Pang",  
+        email = "samantha.pang@mail.utoronto.ca", 
+        role = c("aut", "cre"))
 Maintainer: Samantha Pang <samantha.pang@mail.utoronto.ca>
 Description: Reading, display, and analysis of dual RNA sequence based on host and pathogen data. Takes csv files with gene counts and runs a differential expression analysis on them.
 License: MIT + file LICENSE
@@ -24,3 +26,5 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+URL: https://github.com/smnthpang/rnaDualSeq
+BugReports: https://github.com/smnthpang/rnaDualSeq/issues
