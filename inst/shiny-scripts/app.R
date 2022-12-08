@@ -62,6 +62,8 @@ ui <- fluidPage(
                 accept = c(".rda")),
       selectInput("pick", "Choose a host or pathogen:",
                   choices = c("Host", "Pathogen")),
+      selectInput("hours", "Choose time period:",
+                  choices = c("2h", "4h", "8h", "16h", "24h")),
 
       # br() element to introduce extra vertical spacing ----
       br(),
@@ -100,6 +102,7 @@ server <- function(input, output, session) {
   #dataList <- eventReactive(eventExpr = input$button1, {
 
     choice <- input$pick
+    hour <- input$hours
 
     if (choice == "Host"){
       showNotification("host")
@@ -141,7 +144,7 @@ server <- function(input, output, session) {
     showNotification("de")
 
     output$volc <- renderPlot({
-      return(rnaDualSeq::volcanoPlot(choice, de))
+      return(rnaDualSeq::volcanoPlot(choice, de, hour = hour))
 
     })
 

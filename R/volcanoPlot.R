@@ -6,8 +6,9 @@
 #' @param name what gene is being graphed
 #' @param de_norm A nested list containing differentially expressed results
 #' @param timeperiods a vector containing labels for each time period
+#' @param hour time period for graph
 #'
-#' @return graphs of volcano plots per time period and saves pngs images
+#' @return graph at time period of volcano plot saves pngs images
 #' into a results folder
 #'
 #' @examples
@@ -27,7 +28,7 @@
 #' @import ggplot2
 #' @export
 #'
-volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", "24h")) {
+volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", "24h"), hour = "2h") {
   myplots <- list()
   for (n in 1:length(timeperiods)){
     de_norm[[n]]$diffexpressed <- "NO"
@@ -45,7 +46,7 @@ volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", 
       ggplot2::theme(text=ggplot2::element_text(size=20))
 
     # save plot to list of plots
-    myplots[[n]] <- graph
+    myplots[[timeperiods[n]]] <- graph
 
     check_if_directory_exists <- function(dir_path){
       if(!dir.exists(dir_path)){
@@ -56,5 +57,5 @@ volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", 
     ggplot2::ggsave(paste(name,"_",timeperiods[n],".png",sep=""), graph, path = "Results/VolcanoPlots")
 
   }
-  return(myplots)
+  return(myplots[[hour]])
 }
