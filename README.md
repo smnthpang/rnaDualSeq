@@ -118,6 +118,10 @@ Torrent Burgas, M. (2021). DualSeqDB: a database to assess the relevance
 of bacterial genes during host infection. Nucleic Acids Res. 49,
 D687–D693.
 
+R Core Team (2022). R: A language and environment for statistical
+computing. R Foundation for Statistical Computing, Vienna, Austria. URL
+<https://www.R-project.org/>.
+
 Ritchie ME, Phipson B, Wu D, Hu Y, Law CW, Shi W, Smyth GK (2015).
 “limma powers differential expression analyses for RNA-sequencing and
 microarray studies.” Nucleic Acids Research, 43(7), e47. doi:
