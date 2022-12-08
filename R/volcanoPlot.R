@@ -9,6 +9,13 @@
 #'
 #' @return images of volcano plots per time period
 #'
+#' @example
+#' \dontrun{
+#' norm <- norm_TMM(host_example, phenotype_example)
+#' DE <- identifyDE(norm, phenotype_example)
+#' volcanoPlot("Host Example", DE)
+#' }
+#'
 #' @import ggplot2
 #' @export
 #'

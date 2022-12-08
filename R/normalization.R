@@ -9,6 +9,11 @@
 #'
 #' @return data.norm DGEList
 #'
+#' @example
+#' \dontrun{
+#'  norm_TMM(host_example, phenotype_example)
+#' }
+#'
 #' @import edgeR
 #' @export
 #'

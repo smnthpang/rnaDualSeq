@@ -56,12 +56,12 @@ Below is a description of how rnaDualSeq operates
 
 ## QuickStart 
 
-First use sample data provided within the data folder to create host and pathogen data frames using read_csv function.
+First use sample data provided within the data folder to create host and pathogen data frames using read_csv function or if data is already in rda format, move to the next step.
 
 ```
-host_example <- read_csv("Data/Host.data.csv")
-pathogen_example <- read_csv("Data/Pathogen.data.csv")
-phenotype_example <- read_csv("Data/Pheno.csv")
+host_example <- read_csv(<file path to csv file of host read counts>)
+pathogen_example <- read_csv(<file path to csv file of pathogen read counts>)
+phenotype_example <- read_csv(<file path to csv file of phenotypes>)
 
 ```
 
@@ -72,6 +72,9 @@ Next we can normalize the read counts in each host and pathogen dataframe using 
 ```
 host_normalized_data <- norm_TMM(host_example, phenotype_example)
 pathogen_normalized_data <- norm_TMM(pathogen_example, phenotype_example)
+
+head(host_normalized_data)
+head(pathogen_normalized_data)
 ```
 
 ### identifyDE 
@@ -80,6 +83,9 @@ Now we have normalized counts, we can use the limma package to identify what gen
 ```
 host_DE <- identifyDE(host_normalized_data, phenotype_example)
 pathogen_DE <- identifyDE(pathogen_normalized_data, phenotype_example)
+
+head(host_DE[[1]])
+head(pathogen_DE[[1]])
 ```
 
 ### volcanoPlot
@@ -90,6 +96,9 @@ DEs occur. A result folder containing these plots will appear if it isn't alread
 volcanoPlot("Host", host_DE)
 volcanoPlot("Pathogen", host_DE)
 ```
+
+![Example of Host volcano plot at 2 hours](./Host_2h-1.png)
+
 ### Minimal requirements
 
 * The **R subdirectory** within an R package contains all the R code files or script files. These are files ending with ".R". 

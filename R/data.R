@@ -27,6 +27,9 @@
 #'
 #' @examples
 #' \dontrun{
+#' norm_TMM
+#' identifyDE
+#' volcanoPlot
 #'
 #' }
 #'
@@ -79,7 +82,9 @@
 #'
 #' @examples
 #' \dontrun{
-#'
+#' norm_TMM
+#' identifyDE
+#' volcanoPlot
 #' }
 #'
 "phenotype_example"

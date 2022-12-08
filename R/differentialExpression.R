@@ -12,6 +12,12 @@
 #'
 #' @return list of differentially expressed genes compared with the baseline (0 hours)
 #'
+#' @examples
+#' \dontrun{
+#' norm <- norm_TMM(host_example, phenotype_example)
+#' DE <- identifyDE(norm, phenotype_example)
+#' }
+#'
 #' @export
 #' @import limma
 #' @import stats
