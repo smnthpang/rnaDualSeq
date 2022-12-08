@@ -13,19 +13,19 @@
 #' @export
 #'
 volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", "24h")) {
-  for (n in 1:5){
+  for (n in 1:length(timeperiods)){
     de_norm[[n]]$diffexpressed <- "NO"
     de_norm[[n]]$diffexpressed[de_norm[[n]]$logFC > .58 & de_norm[[n]]$adj.P.Val < 0.01] <- "UP"
     de_norm[[n]]$diffexpressed[de_norm[[n]]$logFC < .58 & de_norm[[n]]$adj.P.Val < 0.01] <- "DOWN"
 
     de_norm[[n]]$de_normlabel <- NA
 
-    graph <- ggplot(data=de_norm[[n]],aes(x=logFC,y=-log10(P.Value),col=diffexpressed, label=de_normlabel))+
-      geom_point()+
-      theme_minimal()+
+    graph <- ggplot2::ggplot(data=de_norm[[n]],ggplot2::aes(x=logFC,y=-log10(P.Value),col=diffexpressed, label=de_normlabel))+
+      ggplot2::geom_point()+
+      ggplot2::theme_minimal()+
       #geom_text_repel()+
-      scale_color_manual(values=c('blue', 'black', 'red'))+
-      theme(text=element_text(size=20))
+      ggplot2::scale_color_manual(values=c('blue', 'black', 'red'))+
+      ggplot2::theme(text=ggplot2::element_text(size=20))
 
     check_if_directory_exists <- function(dir_path){
       if(!dir.exists(dir_path)){
@@ -33,7 +33,7 @@ volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", 
       }
     }
     check_if_directory_exists("Results/VolcanoPlots")
-    ggsave(paste(name,"_",timeperiods[n],".pdf",sep=""), graph, path = "Results/VolcanoPlots")
+    ggplot2::ggsave(paste(name,"_",timeperiods[n],".pdf",sep=""), graph, path = "Results/VolcanoPlots")
 
   }
 }
