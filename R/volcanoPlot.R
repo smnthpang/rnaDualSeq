@@ -56,5 +56,5 @@ volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", 
     ggplot2::ggsave(paste(name,"_",timeperiods[n],".png",sep=""), graph, path = "Results/VolcanoPlots")
 
   }
-  return(graph)
+  return(myplots)
 }
