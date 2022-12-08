@@ -28,7 +28,11 @@ devtools::install_github("smnthpang/rnaDualSeq", build_vignettes = TRUE)
 library("rnaDualSeq")
 ```
 
-To run shinyApp: Under construction
+To run shinyApp:
+
+``` bash
+rnaDualSeq::runRnaDualSeq()
+```
 
 ## Overview
 

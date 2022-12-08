@@ -102,7 +102,7 @@ server <- function(input, output, session) {
   #dataList <- eventReactive(eventExpr = input$button1, {
 
     choice <- input$pick
-    hour <- input$hours
+    inputhour <- input$hours
 
     if (choice == "Host"){
       showNotification("host")
@@ -144,7 +144,7 @@ server <- function(input, output, session) {
     showNotification("de")
 
     output$volc <- renderPlot({
-      return(rnaDualSeq::volcanoPlot(choice, de, hour = hour))
+      return(rnaDualSeq::volcanoPlot(choice, de, hour = inputhour))
 
     })
 
