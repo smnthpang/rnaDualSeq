@@ -13,6 +13,11 @@
 #' \dontrun{
 #'  norm_TMM(host_example, phenotype_example)
 #' }
+#' @references
+#'
+#' Robinson MD, McCarthy DJ and Smyth GK (2010). edgeR: a Bioconductor package
+#' for differential expression analysis of digital gene expression data.
+#' Bioinformatics 26, 139-140
 #'
 #' @import edgeR
 #' @export

@@ -18,6 +18,21 @@
 #' DE <- identifyDE(norm, phenotype_example)
 #' }
 #'
+#' @references
+#'
+#' Ritchie ME, Phipson B, Wu D, Hu Y, Law CW, Shi W, Smyth GK (2015).
+#' “limma powers differential expression analyses for RNA-sequencing and
+#' microarray studies.” Nucleic Acids Research, 43(7), e47. doi: 10.1093/nar/gkv007
+#'
+#' Dinarvand, M., Kock, F., Al Mouiee, D., Vuong, K., Vijayan, A., Tanzim, A.
+#' F., Azad, A. K. M., Penesyan, A., Castaño-Rodríguez, N., & Vafaee, F. (2022).
+#' DSEQSB: A Systems Biology Approach to decipher dynamics of host-pathogen
+#' interactions using temporal dual RNA-Seq Data. https://doi.org/10.1101/2022.02.28.482417
+#'
+#' Macho Rendón, J., Lang, B., Ramos Llorens, M., Tartaglia, G.G., and
+#' Torrent Burgas, M. (2021). DualSeqDB: a database to assess the relevance of
+#' bacterial genes during host infection. Nucleic Acids Res. 49, D687–D693.
+#'
 #' @export
 #' @import limma
 #' @import stats
