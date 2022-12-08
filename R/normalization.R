@@ -4,8 +4,8 @@
 
 #'Normalize data by using trimmed mean of M-values to convert size of data to an effective library size
 #'
-#' @param data dRNA-seq tab-delimited input csv file with read counts
-#' @param pheno csv file containing sample names and time/condition of each sample
+#' @param data dRNA-seq tab-delimited input data frame with read counts
+#' @param pheno data frame containing sample names and time/condition of each sample
 #'
 #' @return data.norm DGEList
 #'
