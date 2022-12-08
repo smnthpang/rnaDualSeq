@@ -150,22 +150,7 @@ server <- function(input, output, session) {
 
 
   })
-  # output$volc <- renderPlot({
-  #
-  #   inFile1 <- input$file1
-  #   inFile2 <- input$file2
-  #   inFile3 <- input$file3
-  #   n <- input$n
-  #
-  #   if (is.null(inFile1) || is.null(inFile2) || is.na(n)) {
-  #     return(NULL)
-  #   }
-  #
-  #   host_counts <- get(load(inFile1$datapath))
-  #   pathogen_counts <- get(load(inFile2$datapath))
-  #   phenotype <- get(load(inFile3$datapath))
-  #   return (rnaDualSeq::norm_TMM(host_counts, phenotype))
-  # })
+
 }
 
 # Run the application
