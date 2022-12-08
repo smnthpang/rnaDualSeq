@@ -68,38 +68,67 @@ ui <- fluidPage(
 
       # actionButton
       actionButton(inputId = "button1",
-                   label = "RUN")
+                   label = "RUN"),
+
+      actionButton(inputId = "do",
+                   label = "test")
     ),
 
     # Main panel for displaying outputs ----
     mainPanel(
       # Output: Tabset w/ plot, summary, and table ----
-      plotOutput('volc')
+      textOutput("selected_var1"),
+      textOutput("sendCustomMessage"),
+      #tableOutput('table'),
+      plotOutput('volc'),
+      #textOutput(text)
 
     )
   )
 )
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
-  dataList <- eventReactive(eventExpr = input$button1, {
-    print("test test")
+server <- function(input, output, session) {
+
+  # observeEvent(c(input$button1), ignoreInit = TRUE, {
+  #   showNotification("This is a notification.")
+  # })
+
+  output$table <- renderTable(iris)
+
+  output$selected_var1 <- renderText({
+    "You have selected this"
+  })
+
+  observeEvent(c(input$button1), ignoreInit = TRUE, {
+  #dataList <- eventReactive(eventExpr = input$button1, {
+    showNotification("pressed")
+    inFile1 <- input$file1
+    inFile2 <- input$file2
+    inFile3 <- input$file3
+    #n <- input$n
+
+    showNotification("after files")
+
+
+    if (is.null(inFile1) || is.null(inFile3)) {
+      showNotification("error")
+      return(NULL)
+    }
+    host_counts <- get(load(inFile1$datapath))
+    showNotification("host_counts")
+    pathogen_counts <- get(load(inFile2$datapath))
+    showNotification("pathogen_counts")
+    phenotype <- get(load(inFile3$datapath))
+    showNotification("phenotype")
+    norm <- rnaDualSeq::norm_TMM(host_counts, phenotype)
+    showNotification("norm")
+
+    de <- rnaDualSeq::identifyDE(norm, phenotype)
+    showNotification("de")
+
+
     output$volc <- renderPlot({
-
-      inFile1 <- input$file1
-      inFile2 <- input$file2
-      inFile3 <- input$file3
-      n <- input$n
-
-      if (is.null(inFile1) || is.null(inFile2) || is.na(n)) {
-        return(NULL)
-      }
-      output$before <-
-      host_counts <- get(load(inFile1$datapath))
-      pathogen_counts <- get(load(inFile2$datapath))
-      phenotype <- get(load(inFile3$datapath))
-      norm <- rnaDualSeq::norm_TMM(host_counts, phenotype)
-      de <- rnaDualSeq::identifyDE(norm, phenotype)
       return(rnaDualSeq::volcanoPlot("Host", de))
 
     })
