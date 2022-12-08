@@ -28,6 +28,7 @@ volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", 
     de_norm[[n]]$de_normlabel <- NA
 
     graph <- ggplot2::ggplot(data=de_norm[[n]],ggplot2::aes(x=logFC,y=-log10(P.Value),col=diffexpressed, label=de_normlabel))+
+      ggplot2::ggtitle(paste(name,"_",timeperiods[n],sep="")) +
       ggplot2::geom_point()+
       ggplot2::theme_minimal()+
       #geom_text_repel()+
@@ -40,7 +41,7 @@ volcanoPlot <- function(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", 
       }
     }
     check_if_directory_exists("Results/VolcanoPlots")
-    ggplot2::ggsave(paste(name,"_",timeperiods[n],".pdf",sep=""), graph, path = "Results/VolcanoPlots")
+    ggplot2::ggsave(paste(name,"_",timeperiods[n],".png",sep=""), graph, path = "Results/VolcanoPlots")
 
   }
 }
