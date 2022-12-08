@@ -39,7 +39,9 @@ ui <- fluidPage(
       # input
       tags$p("Instructions: Below input read counts of host or pathogen with
             the phenotype file.
-            Then press 'Run'. Navigate the right to explore the results."),
+            Then press 'Run'. Navigate the right to explore the results.
+             All example data sets can be found at https://github.com/smnthpang
+             /rnaDualSeq/tree/main/inst/extdata"),
 
       # br() element to introduce extra vertical spacing ----
       br(),
@@ -48,8 +50,8 @@ ui <- fluidPage(
       #shinyalert::useShinyalert(force = TRUE),  # Set up shinyalert
 
       uiOutput("tab1"),
-      actionButton(inputId = "data1",
-                   label = "Example Dataset Details"),
+      # actionButton(inputId = "data1",
+      #              label = "Example Dataset"),
       fileInput(inputId = "file1",
                 label = "Select a host dRNA-seq tab-delimited input file with read counts to visualize. File should be in .rda format",
                 accept = c(".rda")),
@@ -70,10 +72,7 @@ ui <- fluidPage(
 
       # actionButton
       actionButton(inputId = "button1",
-                   label = "RUN"),
-
-      actionButton(inputId = "do",
-                   label = "test")
+                   label = "RUN")
     ),
 
     # Main panel for displaying outputs ----
@@ -105,16 +104,16 @@ server <- function(input, output, session) {
     inputhour <- input$hours
 
     if (choice == "Host"){
-      showNotification("host")
+      #showNotification("host")
     }
 
-    showNotification("pressed")
+    #showNotification("pressed")
     inFile1 <- input$file1
     inFile2 <- input$file2
     inFile3 <- input$file3
     #n <- input$n
 
-    showNotification("after files")
+    #showNotification("after files")
 
 
     if (is.null(inFile1) || is.null(inFile2) || is.null(inFile3)) {
@@ -123,11 +122,11 @@ server <- function(input, output, session) {
     }
 
     host_counts <- get(load(inFile1$datapath))
-    showNotification("host_counts")
+    #showNotification("host_counts")
     pathogen_counts <- get(load(inFile2$datapath))
-    showNotification("pathogen_counts")
+    #showNotification("pathogen_counts")
     phenotype <- get(load(inFile3$datapath))
-    showNotification("phenotype")
+    #showNotification("phenotype")
 
     #selecting which file to pair with phenotype
 
@@ -138,10 +137,10 @@ server <- function(input, output, session) {
     }
 
     norm <- rnaDualSeq::norm_TMM(counts, phenotype)
-    showNotification("norm")
+    #showNotification("norm")
 
     de <- rnaDualSeq::identifyDE(norm, phenotype)
-    showNotification("de")
+    #showNotification("de")
 
     output$volc <- renderPlot({
       return(rnaDualSeq::volcanoPlot(choice, de, hour = inputhour))
