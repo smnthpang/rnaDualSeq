@@ -17,7 +17,6 @@ ui <- fluidPage(
 
     # Sidebar with a slider input for number of bins
     sidebarLayout(
-        useShinyjs()
         sidebarPanel(
             sliderInput("bins",
                         "Number of bins:",

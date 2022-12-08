@@ -8,7 +8,7 @@ differential expression at different time periods}
 identifyDE(data, pheno)
 }
 \arguments{
-\item{data}{normalized data read counts}
+\item{data}{dRNA-seq tab-delimited input csv file with read counts}
 
 \item{pheno}{csv file containing sample names and time/condition of each sample}
 }
@@ -18,4 +18,11 @@ list of differentially expressed genes compared with the baseline (0 hours)
 \description{
 The limma package is used to find differentially expressed (DE) genes, in which expression data
 is described by linear modelling
+}
+\examples{
+\dontrun{
+norm <- norm_TMM(host_example, phenotype_example)
+DE <- identifyDE(norm, phenotype_example)
+}
+
 }

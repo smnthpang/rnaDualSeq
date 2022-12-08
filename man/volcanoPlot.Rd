@@ -5,16 +5,12 @@
 \title{Creates 5 volcano plots denoting each time period in data set visualing
 significant upregulation and downregulation genes}
 \usage{
-volcanoPlot(
-  name,
-  differentialExpression,
-  timeperiods = c("2h", "4h", "8h", "16h", "24h")
-)
+volcanoPlot(name, de_norm, timeperiods = c("2h", "4h", "8h", "16h", "24h"))
 }
 \arguments{
 \item{name}{what gene is being graphed}
 
-\item{differentialExpression}{A nested list containing differentially expressed results}
+\item{de_norm}{A nested list containing differentially expressed results}
 
 \item{timeperiods}{a vector containing labels for each time period}
 }
@@ -24,4 +20,12 @@ images of volcano plots per time period
 \description{
 Creates 5 volcano plots denoting each time period in data set visualing
 significant upregulation and downregulation genes
+}
+\examples{
+\dontrun{
+norm <- norm_TMM(host_example, phenotype_example)
+DE <- identifyDE(norm, phenotype_example)
+volcanoPlot("Host Example", DE)
+}
+
 }

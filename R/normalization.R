@@ -9,7 +9,7 @@
 #'
 #' @return data.norm DGEList
 #'
-#' @example
+#' @examples
 #' \dontrun{
 #'  norm_TMM(host_example, phenotype_example)
 #' }

@@ -9,7 +9,7 @@
 #'
 #' @return images of volcano plots per time period
 #'
-#' @example
+#' @examples
 #' \dontrun{
 #' norm <- norm_TMM(host_example, phenotype_example)
 #' DE <- identifyDE(norm, phenotype_example)

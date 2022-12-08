@@ -17,3 +17,9 @@ data.norm DGEList
 \description{
 Normalize data by using trimmed mean of M-values to convert size of data to an effective library size
 }
+\examples{
+\dontrun{
+ norm_TMM(host_example, phenotype_example)
+}
+
+}
